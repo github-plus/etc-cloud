@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "name": "lambda",
+      "type": "java.lang.String"
+    }
+  ],
+  "properties": [
+    {
+      "name": "lambda-name",
+      "type": "java.lang.String"
+
+    },
+    {
+      "name": "lambda-version",
+      "type": "java.lang.String",
+      "defaultValue": "1.0.0-SNAPSHOT"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+lambda-version: @project.version@
+lambda-name: @project.name@
+spring:
+  profiles:
+    active: @profiles.active@
+server:
+  port: 8081
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        group: dev-group
+        namespace: 0b98cf67-002d-47bb-bdff-b0c87b9d9410
+        metadata:
+          username: root
+          password: 123456
+        heart-beat-timeout: 10000
+      config:
+        namespace: 0b98cf67-002d-47bb-bdff-b0c87b9d9410
+        group: dev-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: etc-cloud-gateway-dev.yml
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+  application:
+    name: etc-cloud-gateway-dev
+---
+spring:
+  profiles: uat
+  cloud:
+    nacos:
+      discovery:
+        group: uat-group
+        namespace: 4dee84b8-6724-4767-a50d-5f80c34336f2
+        metadata:
+          username: root
+          password: 123456
+        server-addr: ${spring.cloud.nacos.server-addr}
+      config:
+        namespace: 4dee84b8-6724-4767-a50d-5f80c34336f2
+        group: uat-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: co-money-gateway-uat.yml
+        username: nacos
+        password: 1qazQAZ.
+      server-addr: 140.143.1.200:8848
+  application:
+    name: co-money-gateway-uat
+
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 140.143.1.200:8848
+        group: prod-group
+        namespace: 65bb6e89-2704-4084-86a6-3d5cd13683a8
+        metadata:
+          username: root
+          password: 123456
+      config:
+        namespace: 65bb6e89-2704-4084-86a6-3d5cd13683a8
+        server-addr: 140.143.1.200:8848
+        group: prod-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: co-money-gateway-prod.yml
+        username: nacos
+        password: 1qazQAZ.
+  application:
+    name: co-money-gateqway-prod

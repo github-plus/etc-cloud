@@ -1,0 +1,80 @@
+lambda-version: @project.version@
+lambda-name: @project.name@
+spring:
+  profiles:
+    active: @profiles.active@
+server:
+  port: 8069
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        group: dev-group
+        namespace: 8e3b68b0-81d2-4123-9072-27594c3e877f
+        metadata:
+          username: nacos
+          password: nacos
+        heart-beat-timeout: 10000
+      config:
+        namespace: 8e3b68b0-81d2-4123-9072-27594c3e877f
+        group: dev-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: application-dev.yml
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+  application:
+    name: application-dev
+---
+spring:
+  profiles: uat
+  cloud:
+    nacos:
+      discovery:
+        group: uat-group
+        namespace: 3a19e1c4-069b-449c-be4b-bef6b934cf70
+        metadata:
+          username: root
+          password: HuaYuan@2020
+        server-addr: ${spring.cloud.nacos.server-addr}
+      config:
+        namespace: 4dee84b8-6724-4767-a50d-5f80c34336f2
+        group: uat-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: application-uat.yml
+        username: nacos
+        password: HuaYuan@2020
+      server-addr: www.szhoyur.com:8848
+  application:
+    name: etc-cloud-auth-prod
+
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.szhoyur.com:8848
+        group: prod-group
+        namespace: b59bb68a-1547-485c-ad48-00246fb84697
+        metadata:
+          username: root
+          password: HuaYuan@2020
+      config:
+        namespace: 65bb6e89-2704-4084-86a6-3d5cd13683a8
+        server-addr: www.szhoyur.com:8848
+        group: prod-group
+        refresh-enabled: true
+        file-extension: yml
+        extension-configs[0]:
+          data-id: application-prod.yml
+        username: nacos
+        password: HuaYuan@2020
+  application:
+    name: etc-cloud-auth-prod

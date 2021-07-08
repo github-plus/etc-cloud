@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    httptrace:
+      enabled: true
+    info:
+      enabled: true
+  auditevents:
+    enabled: true
+management.trace.http.enabled: true
+info.artifactId: @project.artifactId@
+info:
+  name: mrchao
+spring:
+  profiles:
+    active: @profiles.active@
+
